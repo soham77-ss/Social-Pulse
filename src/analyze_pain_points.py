@@ -277,3 +277,4 @@ if __name__ == "__main__":
     print(aspect_df.groupby("brand").head(3)[["brand", "aspect", "mentions", "negative_rate_pct", "triage_priority_score"]].to_string(index=False))
     print("\nCharts saved to: reports/figures/")
     print("Full report saved to: reports/findings.md")
+
