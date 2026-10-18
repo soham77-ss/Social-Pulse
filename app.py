@@ -183,6 +183,10 @@ with tab1:
     else:
         c_left, c_right = st.columns(2)
 
+       # Dynamic color mapping for any selected brands
+        default_colors = {"Apple": "#1f77b4", "Samsung": "#ff7f0e", "Google Pixel": "#2ca02c", "OnePlus": "#d62728"}
+        active_colors = {b: default_colors.get(b, "#7f7f7f") for b in selected_brands}
+
         with c_left:
             fig_triage = px.bar(
                 aspect_sub.sort_values("triage_priority_score", ascending=True),
@@ -191,13 +195,9 @@ with tab1:
                 color="brand",
                 barmode="group",
                 orientation="h",
-                color_discrete_map={"Apple": "#1f77b4", "Samsung": "#ff7f0e", "Google Pixel": "#2ca02c", "OnePlus": "#d62728"},
-                title="Engineering Triage Priority Score (Volume × Negativity × Engagement)",
-                labels={
-                    "triage_priority_score": "Triage Priority Score",
-                    "aspect": "Product Aspect",
-                    "brand": "Brand",
-                },
+                color_discrete_map=active_colors,
+                title="Engineering Triage Priority Score",
+                labels={"triage_priority_score": "Triage Priority Score", "aspect": "Product Aspect", "brand": "Brand"},
                 text_auto=".2f",
             )
             fig_triage.update_layout(height=440, legend_title_text="Brand")
@@ -211,21 +211,10 @@ with tab1:
                 size="mentions",
                 color="brand",
                 hover_name="aspect",
-                hover_data={
-                    "brand": True,
-                    "mentions": True,
-                    "share_of_voice_pct": ":.1f",
-                    "negative_rate_pct": ":.1f",
-                    "triage_priority_score": ":.2f",
-                },
                 size_max=45,
-                color_discrete_map={"Apple": "#1f77b4", "Samsung": "#ff7f0e", "Google Pixel": "#2ca02c", "OnePlus": "#d62728"},
-                title="Pain-Point Risk Matrix (Discussion Volume vs. Negative Severity)",
-                labels={
-                    "share_of_voice_pct": "Share of Brand Discussions (%)",
-                    "negative_rate_pct": "Negative Sentiment Rate (%)",
-                    "brand": "Brand",
-                },
+                color_discrete_map=active_colors,
+                title="Pain-Point Risk Matrix (Volume vs. Negative Severity)",
+                labels={"share_of_voice_pct": "Share of Brand Discussions (%)", "negative_rate_pct": "Negative Sentiment Rate (%)", "brand": "Brand"},
             )
             fig_quadrant.update_layout(height=440)
             st.plotly_chart(fig_quadrant, use_container_width=True)
