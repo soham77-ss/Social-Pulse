@@ -14,6 +14,8 @@ class SocialPulseRedditCollector:
     BRAND_SUBREDDITS = {
         "Apple": ["iphone", "ios", "apple"],
         "Samsung": ["samsung", "samsunggalaxy", "GalaxyS24"],
+        "Google Pixel": ["GooglePixel", "pixel_phones"],
+        "OnePlus": ["oneplus", "OnePlus12"],
     }
 
     PAIN_POINT_KEYWORDS = {

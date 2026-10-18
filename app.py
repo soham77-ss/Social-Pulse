@@ -191,7 +191,7 @@ with tab1:
                 color="brand",
                 barmode="group",
                 orientation="h",
-                color_discrete_map={"Apple": "#1f77b4", "Samsung": "#ff7f0e"},
+                color_discrete_map={"Apple": "#1f77b4", "Samsung": "#ff7f0e", "Google Pixel": "#2ca02c", "OnePlus": "#d62728"},
                 title="Engineering Triage Priority Score (Volume × Negativity × Engagement)",
                 labels={
                     "triage_priority_score": "Triage Priority Score",
@@ -219,7 +219,7 @@ with tab1:
                     "triage_priority_score": ":.2f",
                 },
                 size_max=45,
-                color_discrete_map={"Apple": "#1f77b4", "Samsung": "#ff7f0e"},
+                color_discrete_map={"Apple": "#1f77b4", "Samsung": "#ff7f0e", "Google Pixel": "#2ca02c", "OnePlus": "#d62728"},
                 title="Pain-Point Risk Matrix (Discussion Volume vs. Negative Severity)",
                 labels={
                     "share_of_voice_pct": "Share of Brand Discussions (%)",

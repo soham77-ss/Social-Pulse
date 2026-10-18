@@ -84,7 +84,7 @@ class SocialPulseIntelligenceEngine:
     def compute_brand_aspect_matrix(self, df: pd.DataFrame) -> pd.DataFrame:
         rows = []
         for col, readable_name in self.ASPECT_LABELS.items():
-            for brand in ["Apple", "Samsung"]:
+            for brand in sorted(df["brand"].unique()):
                 brand_df = df[df["brand"] == brand]
                 sub = brand_df[brand_df[col] == 1]
                 if len(sub) == 0:
@@ -141,7 +141,7 @@ class SocialPulseIntelligenceEngine:
             y="aspect",
             x="share_of_voice_pct",
             hue="brand",
-            palette={"Apple": "#1f77b4", "Samsung": "#ff7f0e"},
+            
         )
         plt.title("Q1: Most Frequently Discussed Smartphone Features (% of Brand Posts)", fontsize=13, weight="bold")
         plt.xlabel("Share of Brand Discussions (%)")
@@ -158,7 +158,7 @@ class SocialPulseIntelligenceEngine:
             y="aspect",
             x="negative_rate_pct",
             hue="brand",
-            palette={"Apple": "#d62728", "Samsung": "#9467bd"},
+            
         )
         plt.title("Q2: Negative Sentiment Rate by Product Feature (Apple vs. Samsung)", fontsize=13, weight="bold")
         plt.xlabel("Negative Posts Within Feature (%)")
@@ -175,7 +175,7 @@ class SocialPulseIntelligenceEngine:
             y="aspect",
             x="triage_priority_score",
             hue="brand",
-            palette={"Apple": "#2ca02c", "Samsung": "#e377c2"},
+            
         )
         plt.title("Q5: Product Team Triage Priority Score (Volume × Negativity × Engagement)", fontsize=13, weight="bold")
         plt.xlabel("Triage Priority Index")
