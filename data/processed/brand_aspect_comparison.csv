@@ -1,0 +1,15 @@
+brand,aspect_code,aspect,mentions,share_of_voice_pct,negative_posts,negative_rate_pct,mean_sentiment,median_interactions,triage_priority_score
+Apple,aspect_software_os,Software & OS Updates,271,61.6,105,38.7,0.064,2,26.22
+Apple,aspect_display_screen,Display & Screen,99,22.5,34,34.3,0.114,2,8.49
+Apple,aspect_battery_charging,Battery & Charging,61,13.9,30,49.2,0.008,2,7.49
+Apple,aspect_camera_video,Camera & Video,84,19.1,26,31.0,0.222,2,6.49
+Apple,aspect_performance_speed,Performance & Speed,24,5.5,13,54.2,-0.126,3,4.44
+Apple,aspect_thermals_heating,Thermals & Heating,13,3.0,8,61.5,-0.152,3,2.52
+Apple,aspect_price_support_value,"Price, Warranty & Value",22,5.0,6,27.3,0.251,4,2.19
+Samsung,aspect_battery_charging,Battery & Charging,165,34.4,77,46.7,0.05,8,35.25
+Samsung,aspect_performance_speed,Performance & Speed,105,21.9,50,47.6,0.044,9,23.99
+Samsung,aspect_software_os,Software & OS Updates,231,48.1,81,35.1,0.097,2,18.54
+Samsung,aspect_display_screen,Display & Screen,128,26.7,56,43.8,0.061,3,16.17
+Samsung,aspect_camera_video,Camera & Video,103,21.5,41,39.8,0.101,3,11.84
+Samsung,aspect_price_support_value,"Price, Warranty & Value",55,11.5,21,38.2,0.185,9,10.07
+Samsung,aspect_thermals_heating,Thermals & Heating,35,7.3,18,51.4,0.013,11,9.32
