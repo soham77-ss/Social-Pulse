@@ -47,7 +47,6 @@ def load_data():
     df_p = pd.read_csv(posts_path)
     df_a = pd.read_csv(aspect_path)
 
-    # Granular 5-tier sentiment categorization
     def assign_granular_sentiment(score):
         if score <= -0.4:
             return "🔴 Strongly Negative"
@@ -79,7 +78,7 @@ base_vader, tuned_vader = load_analyzers()
 
 available_brands = sorted(df["brand"].unique().tolist())
 
-# ---------------- SIDEBAR CONTROLS (EXPANDED SENTIMENT) ----------------
+# ---------------- SIDEBAR CONTROLS ----------------
 st.sidebar.title("📱 SocialPulse Filter")
 st.sidebar.caption("Granular Consumer Intelligence")
 
@@ -126,7 +125,6 @@ min_engagement = st.sidebar.slider(
     value=0,
 )
 
-# Filter Logic
 filtered_df = df[
     (df["brand"].isin(selected_brands))
     & (df["granular_sentiment"].isin(selected_granular_sentiments))
@@ -193,7 +191,8 @@ with tab1:
                 color="brand",
                 barmode="group",
                 orientation="h",
-                title="Q5: Engineering Triage Priority Score",
+                color_discrete_map={"Apple": "#1f77b4", "Samsung": "#ff7f0e"},
+                title="Engineering Triage Priority Score (Volume × Negativity × Engagement)",
                 labels={
                     "triage_priority_score": "Triage Priority Score",
                     "aspect": "Product Aspect",
@@ -201,7 +200,7 @@ with tab1:
                 },
                 text_auto=".2f",
             )
-            fig_triage.update_layout(height=430, legend_title_text="Brand")
+            fig_triage.update_layout(height=440, legend_title_text="Brand")
             st.plotly_chart(fig_triage, use_container_width=True)
 
         with c_right:
@@ -212,17 +211,23 @@ with tab1:
                 size="mentions",
                 color="brand",
                 hover_name="aspect",
-                text="aspect",
-                size_max=42,
-                title="Q1 & Q2: Pain-Point Risk Matrix (Share of Voice vs. Negative Rate %)",
+                hover_data={
+                    "brand": True,
+                    "mentions": True,
+                    "share_of_voice_pct": ":.1f",
+                    "negative_rate_pct": ":.1f",
+                    "triage_priority_score": ":.2f",
+                },
+                size_max=45,
+                color_discrete_map={"Apple": "#1f77b4", "Samsung": "#ff7f0e"},
+                title="Pain-Point Risk Matrix (Discussion Volume vs. Negative Severity)",
                 labels={
                     "share_of_voice_pct": "Share of Brand Discussions (%)",
                     "negative_rate_pct": "Negative Sentiment Rate (%)",
                     "brand": "Brand",
                 },
             )
-            fig_quadrant.update_traces(textposition="top center")
-            fig_quadrant.update_layout(height=430)
+            fig_quadrant.update_layout(height=440)
             st.plotly_chart(fig_quadrant, use_container_width=True)
 
         st.markdown("#### Full Brand × Aspect Comparison Table")
@@ -247,7 +252,7 @@ with tab1:
 # ==============================================================================
 with tab2:
     st.subheader("Recurring Complaint Phrases (TF-IDF Bigrams & Trigrams)")
-    
+
     available_tfidf_brands = [b for b in selected_brands if b in df["brand"].unique()]
     if not available_tfidf_brands:
         available_tfidf_brands = ["Samsung", "Apple"]
@@ -344,7 +349,7 @@ with tab3:
 # TAB 4: LIVE SENTIMENT CALIBRATION SANDBOX
 # ==============================================================================
 with tab4:
-    st.subheader("Day 12 Model Validation: Baseline VADER vs. Domain-Tuned VADER")
+    st.subheader("Model Validation: Baseline VADER vs. Domain-Tuned VADER")
     st.markdown(
         "Standard off-the-shelf sentiment models score technical hardware failures "
         "as **Neutral (0.00)**. Test our 35-term smartphone domain lexicon:"
