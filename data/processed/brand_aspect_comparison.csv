@@ -1,15 +1,29 @@
 brand,aspect_code,aspect,mentions,share_of_voice_pct,negative_posts,negative_rate_pct,mean_sentiment,median_interactions,triage_priority_score
-Apple,aspect_software_os,Software & OS Updates,271,61.6,105,38.7,0.064,2,26.22
-Apple,aspect_display_screen,Display & Screen,99,22.5,34,34.3,0.114,2,8.49
-Apple,aspect_battery_charging,Battery & Charging,61,13.9,30,49.2,0.008,2,7.49
-Apple,aspect_camera_video,Camera & Video,84,19.1,26,31.0,0.222,2,6.49
-Apple,aspect_performance_speed,Performance & Speed,24,5.5,13,54.2,-0.126,3,4.44
-Apple,aspect_thermals_heating,Thermals & Heating,13,3.0,8,61.5,-0.152,3,2.52
-Apple,aspect_price_support_value,"Price, Warranty & Value",22,5.0,6,27.3,0.251,4,2.19
-Samsung,aspect_battery_charging,Battery & Charging,165,34.4,77,46.7,0.05,8,35.25
-Samsung,aspect_performance_speed,Performance & Speed,105,21.9,50,47.6,0.044,9,23.99
-Samsung,aspect_software_os,Software & OS Updates,231,48.1,81,35.1,0.097,2,18.54
-Samsung,aspect_display_screen,Display & Screen,128,26.7,56,43.8,0.061,3,16.17
-Samsung,aspect_camera_video,Camera & Video,103,21.5,41,39.8,0.101,3,11.84
-Samsung,aspect_price_support_value,"Price, Warranty & Value",55,11.5,21,38.2,0.185,9,10.07
-Samsung,aspect_thermals_heating,Thermals & Heating,35,7.3,18,51.4,0.013,11,9.32
+Apple,aspect_software_os,Software & OS Updates,70,69.3,22,31.4,0.183,1,15.1
+Apple,aspect_display_screen,Display & Screen,23,22.8,4,17.4,0.319,2,4.35
+Apple,aspect_camera_video,Camera & Video,10,9.9,5,50.0,0.082,1,3.43
+Apple,aspect_performance_speed,Performance & Speed,9,8.9,3,33.3,0.312,1,2.06
+Apple,aspect_battery_charging,Battery & Charging,12,11.9,2,16.7,0.471,1,1.37
+Apple,aspect_thermals_heating,Thermals & Heating,5,5.0,2,40.0,0.138,0,1.37
+Apple,aspect_price_support_value,"Price, Warranty & Value",4,4.0,0,0.0,0.507,0,0.0
+Google Pixel,aspect_software_os,Software & OS Updates,82,34.9,41,50.0,-0.039,3,24.19
+Google Pixel,aspect_display_screen,Display & Screen,70,29.8,30,42.9,0.105,3,17.7
+Google Pixel,aspect_battery_charging,Battery & Charging,55,23.4,21,38.2,0.194,5,16.01
+Google Pixel,aspect_camera_video,Camera & Video,50,21.3,15,30.0,0.326,4,10.88
+Google Pixel,aspect_performance_speed,Performance & Speed,22,9.4,15,68.2,-0.223,4,10.27
+Google Pixel,aspect_price_support_value,"Price, Warranty & Value",38,16.2,15,39.5,0.225,3,8.85
+Google Pixel,aspect_thermals_heating,Thermals & Heating,11,4.7,6,54.5,0.016,3,3.54
+OnePlus,aspect_software_os,Software & OS Updates,32,39.5,15,46.9,-0.003,15,51.91
+OnePlus,aspect_battery_charging,Battery & Charging,32,39.5,9,28.1,0.306,27,37.22
+OnePlus,aspect_camera_video,Camera & Video,18,22.2,9,50.0,0.012,16,31.8
+OnePlus,aspect_display_screen,Display & Screen,27,33.3,8,29.6,0.201,21,30.53
+OnePlus,aspect_price_support_value,"Price, Warranty & Value",17,21.0,7,41.2,0.169,31,29.95
+OnePlus,aspect_thermals_heating,Thermals & Heating,4,4.9,3,75.0,-0.516,42,13.97
+OnePlus,aspect_performance_speed,Performance & Speed,7,8.6,2,28.6,0.213,11,6.14
+Samsung,aspect_software_os,Software & OS Updates,218,54.9,83,38.1,0.06,2,26.19
+Samsung,aspect_battery_charging,Battery & Charging,109,27.5,42,38.5,0.171,4,17.03
+Samsung,aspect_display_screen,Display & Screen,120,30.2,56,46.7,-0.02,2,15.5
+Samsung,aspect_performance_speed,Performance & Speed,56,14.1,26,46.4,0.043,5,11.73
+Samsung,aspect_camera_video,Camera & Video,69,17.4,29,42.0,0.083,3,10.13
+Samsung,aspect_thermals_heating,Thermals & Heating,27,6.8,12,44.4,0.099,4,4.86
+Samsung,aspect_price_support_value,"Price, Warranty & Value",35,8.8,10,28.6,0.309,5,4.51
