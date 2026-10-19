@@ -36,8 +36,14 @@ SMARTPHONE_DOMAIN_LEXICON = {
     "smooth": 2.0, "snappy": 2.2, "crisp": 1.9, "flawless": 2.6, "solid": 1.7,
 }
 
+BRAND_COLORS = {
+    "Apple": "#1f77b4",
+    "Samsung": "#ff7f0e",
+    "Google Pixel": "#2ca02c",
+    "OnePlus": "#d62728",
+}
 
-@st.cache_data
+
 def load_data():
     posts_path = Path("data/processed/reddit_analyzed_posts.csv")
     aspect_path = Path("data/processed/brand_aspect_comparison.csv")
@@ -84,7 +90,7 @@ st.sidebar.caption("Granular Consumer Intelligence")
 
 selected_brands = st.sidebar.multiselect(
     "Select Brands",
-    options=available_brands + ["Google Pixel", "OnePlus"],
+    options=available_brands,
     default=available_brands,
 )
 
@@ -124,6 +130,10 @@ min_engagement = st.sidebar.slider(
     max_value=int(df["engagement_score"].max()),
     value=0,
 )
+
+if not selected_brands:
+    st.warning("Please select at least one brand in the sidebar.")
+    st.stop()
 
 filtered_df = df[
     (df["brand"].isin(selected_brands))
@@ -172,7 +182,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
 ])
 
 # ==============================================================================
-# TAB 1: PRODUCT TRIAGE & BRAND COMPARISON
+# TAB 1: PRODUCT TRIAGE & BRAND COMPARISON (CHARTS START HERE)
 # ==============================================================================
 with tab1:
     st.subheader("Why Macro Sentiment Fails — And What Aspect Triage Reveals")
@@ -183,10 +193,6 @@ with tab1:
     else:
         c_left, c_right = st.columns(2)
 
-       # Dynamic color mapping for any selected brands
-        default_colors = {"Apple": "#1f77b4", "Samsung": "#ff7f0e", "Google Pixel": "#2ca02c", "OnePlus": "#d62728"}
-        active_colors = {b: default_colors.get(b, "#7f7f7f") for b in selected_brands}
-
         with c_left:
             fig_triage = px.bar(
                 aspect_sub.sort_values("triage_priority_score", ascending=True),
@@ -195,12 +201,16 @@ with tab1:
                 color="brand",
                 barmode="group",
                 orientation="h",
-                color_discrete_map=active_colors,
-                title="Engineering Triage Priority Score",
-                labels={"triage_priority_score": "Triage Priority Score", "aspect": "Product Aspect", "brand": "Brand"},
+                color_discrete_map=BRAND_COLORS,
+                title="Engineering Triage Priority Score (Volume × Negativity × Engagement)",
+                labels={
+                    "triage_priority_score": "Triage Priority Score",
+                    "aspect": "Product Aspect",
+                    "brand": "Brand",
+                },
                 text_auto=".2f",
             )
-            fig_triage.update_layout(height=440, legend_title_text="Brand")
+            fig_triage.update_layout(height=450, legend_title_text="Brand")
             st.plotly_chart(fig_triage, use_container_width=True)
 
         with c_right:
@@ -211,12 +221,23 @@ with tab1:
                 size="mentions",
                 color="brand",
                 hover_name="aspect",
+                hover_data={
+                    "brand": True,
+                    "mentions": True,
+                    "share_of_voice_pct": ":.1f",
+                    "negative_rate_pct": ":.1f",
+                    "triage_priority_score": ":.2f",
+                },
                 size_max=45,
-                color_discrete_map=active_colors,
-                title="Pain-Point Risk Matrix (Volume vs. Negative Severity)",
-                labels={"share_of_voice_pct": "Share of Brand Discussions (%)", "negative_rate_pct": "Negative Sentiment Rate (%)", "brand": "Brand"},
+                color_discrete_map=BRAND_COLORS,
+                title="Pain-Point Risk Matrix (Discussion Volume vs. Negative Severity)",
+                labels={
+                    "share_of_voice_pct": "Share of Brand Discussions (%)",
+                    "negative_rate_pct": "Negative Sentiment Rate (%)",
+                    "brand": "Brand",
+                },
             )
-            fig_quadrant.update_layout(height=440)
+            fig_quadrant.update_layout(height=450)
             st.plotly_chart(fig_quadrant, use_container_width=True)
 
         st.markdown("#### Full Brand × Aspect Comparison Table")
@@ -242,13 +263,9 @@ with tab1:
 with tab2:
     st.subheader("Recurring Complaint Phrases (TF-IDF Bigrams & Trigrams)")
 
-    available_tfidf_brands = [b for b in selected_brands if b in df["brand"].unique()]
-    if not available_tfidf_brands:
-        available_tfidf_brands = ["Samsung", "Apple"]
-
     ctrl1, ctrl2, ctrl3 = st.columns(3)
     with ctrl1:
-        tfidf_brand = st.selectbox("Select Brand for Phrase Extraction", available_tfidf_brands)
+        tfidf_brand = st.selectbox("Select Brand for Phrase Extraction", selected_brands)
     with ctrl2:
         tfidf_aspect = st.selectbox("Filter by Product Aspect", list(ASPECT_MAP.keys()), key="tfidf_asp")
     with ctrl3:
